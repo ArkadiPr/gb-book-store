@@ -14,15 +14,21 @@ public class BookFilter {
 
     public BookFilter(Map<String, String> params) {
         spec = Specification.where(null);
-        if (params.containsKey("maxPrice")) {
-            spec = spec.and(BookSpecifications.priceLesserOrEqualsThan(Integer.parseInt(params.get("maxPrice"))));
-        }
-        if (params.containsKey("minPrice")) {
-            spec = spec.and(BookSpecifications.priceGreaterOrEqualsThan(Integer.parseInt(params.get("minPrice"))));
-        }
-        if (params.containsKey("titlePart")) {
-            spec = spec.and(BookSpecifications.titleLike(params.get("titlePart")));
+
+        for (Enum<Book.Genre> g : Book.Genre.values()) {
+            if (params.containsKey(g.name()) && params.get(g.name()).equals("true")){
+                spec = spec.or(BookSpecifications.genreEqual(g));
+            }
         }
 
+        if (params.containsKey("maxPrice") && !params.get("maxPrice").isEmpty()) {
+            spec = spec.and(BookSpecifications.priceLesserOrEqualsThan(Integer.parseInt(params.get("maxPrice"))));
+        }
+        if (params.containsKey("minPrice") && !params.get("minPrice").isEmpty()) {
+            spec = spec.and(BookSpecifications.priceGreaterOrEqualsThan(Integer.parseInt(params.get("minPrice"))));
+        }
+        if (params.containsKey("titlePart") && !params.get("titlePart").isEmpty()) {
+            spec = spec.and(BookSpecifications.titleLike(params.get("titlePart")));
+        }
     }
 }

@@ -35,10 +35,16 @@ public class BookController {
         model.addAttribute("pageHasPrevious", page.hasPrevious());
         model.addAttribute("nextPageNumber", page.nextOrLastPageable().getPageNumber());
         model.addAttribute("prevPageNumber", page.previousOrFirstPageable().getPageNumber());
+        model.addAttribute("genres", Book.Genre.values());
 
-//        for (Map.Entry<String, String> entry : params.entrySet()){
-//            model.addAttribute(entry.getKey(), entry.getValue());
-//        }
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Map.Entry<String, String> entry : params.entrySet()){
+            stringBuilder.append("&");
+            stringBuilder.append(entry.getKey()).append("=").append(entry.getValue());
+        }
+
+        model.addAttribute("strParam", stringBuilder.toString());
+
 
         return "store-page";
     }

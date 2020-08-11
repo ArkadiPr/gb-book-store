@@ -2,6 +2,7 @@ package com.geekbrains.book.store.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.type.Type;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -11,6 +12,10 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 public class Book {
+    public enum Genre {
+        FANTASY, FICTION, DETECTIVE;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -27,4 +32,10 @@ public class Book {
 
     @Column(name = "publish_year")
     private int publishYear;
+
+//    @Transient
+//    @ElementCollection(targetClass = Genre.class, fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "genre")
+    private Genre genre;
 }
