@@ -20,18 +20,20 @@ CREATE TABLE users_roles (
   foreign key (role_id) references roles (id)
 );
 
+
+
+
 insert into roles (name)
 values
 ('ROLE_USER'), ('ROLE_ADMIN'), ('DELETE_USERS_PERMISSION');
 
 insert into users (username, password, email)
 values
--- ('Bob Johnson', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'bob_johnson@gmail.com'),
--- ('John Johnson', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'john_johnson@gmail.com'),
-('admin', '$2y$12$s6s0XMmstoiq0brZOx5Z4.S6VFTWXLkSnyCIZvLdhgoKR82iFqpUq', 'admin@email.com');
+('Bob Johnson', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'bob_johnson@gmail.com'),
+('John Johnson', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'john_johnson@gmail.com'),
+('admin', '$2y$12$2PUgtsFnfp3Ok6fYlIcmluoIsFrApKjNhPGjuE9kmAz6N5w/DDBei', 'admin@');
 
--- insert into users_roles (user_id, role_id) values (1, 1), (1, 3);
-insert into users_roles (user_id, role_id) values (1, 2);
+insert into users_roles (user_id, role_id) values (1, 1), (1, 3), (3, 2);
 
 create table books (
   id bigserial primary key,
@@ -53,3 +55,37 @@ insert into books (title, description, price, publish_year, genre) values
 ('LOTR 2', 'Description 9', 900.0, 2004, 'FICTION'),
 ('LOTR 3', 'Description 10', 600.0, 2001, 'FICTION'),
 ('Hobbit', 'Description 11', 500.0, 2001, 'FICTION');
+
+
+
+create table orders (
+  id                    bigserial,
+  user_id               bigint,
+  primary key (id)
+--   foreign key (user_id) references users (id)
+);
+
+create table orderitems (
+  id                    bigserial,
+  book_id              bigint,
+  count                 int,
+  order_id              bigint,
+  primary key (id),
+  foreign key (order_id) references orders (id)
+);
+
+CREATE TABLE orders_orderitems (
+  order_id               bigint,
+  orderitem_id               bigint,
+  primary key (order_id, orderitem_id),
+  foreign key (orderitem_id) references orderitems (id),
+  foreign key (order_id) references orders (id)
+);
+
+-- CREATE TABLE users_orders (
+--   user_id               bigint,
+--   order_id               bigint,
+--   primary key (order_id, user_id),
+--   foreign key (order_id) references orders (id),
+--   foreign key (user_id) references users (id)
+-- );
