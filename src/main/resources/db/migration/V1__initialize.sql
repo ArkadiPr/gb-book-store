@@ -41,6 +41,27 @@ create table books (
   publish_year int,
   genre varchar(255)
 );
+
+create table orders (
+  id                    bigserial,
+  user_id               bigint not null,
+  primary key (id),
+  foreign key (user_id) references users (id)
+);
+
+create table orderitems (
+  id                    bigserial,
+  order_id              bigint not null,
+  book_id               bigint not null,
+  amount                int not null,
+
+  primary key (id),
+  foreign key (order_id) references orders (id),
+  foreign key (book_id) references books (id)
+);
+
+
+
 insert into books (title, description, price, publish_year, genre) values
 ('Harry Potter 1', 'Description 1', 300.0, 2000, 'FANTASY'),
 ('Harry Potter 2', 'Description 2', 400.0, 2001, 'FANTASY'),

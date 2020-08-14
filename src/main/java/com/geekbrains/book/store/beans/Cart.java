@@ -7,6 +7,8 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.Map;
+
 @Data
 @AllArgsConstructor
 @Component
@@ -14,6 +16,7 @@ import org.springframework.web.context.WebApplicationContext;
 public class Cart {
 //    private BookService bookService;
 
+//    private Map<Book, >
 
 //    private List<OrderItem> orderItems = new ArrayList<>();
 //
