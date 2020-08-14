@@ -1,5 +1,67 @@
-create table books (id bigserial primary key, title varchar(255), description varchar(5000),
-price numeric(8, 2), publish_year int, genre varchar(255));
+create table users (
+  id                    bigserial,
+  username              varchar(30) not null,
+  password              varchar(80) not null,
+  email                 varchar(50) unique,
+  primary key (id)
+);
+
+create table roles (
+  id                    serial,
+  name                  varchar(50) not null,
+  primary key (id)
+);
+
+CREATE TABLE users_roles (
+  user_id               bigint not null,
+  role_id               int not null,
+  primary key (user_id, role_id),
+  foreign key (user_id) references users (id),
+  foreign key (role_id) references roles (id)
+);
+
+insert into roles (name)
+values
+('ROLE_USER'), ('ROLE_ADMIN'), ('DELETE_USERS_PERMISSION');
+
+insert into users (username, password, email)
+values
+-- ('Bob Johnson', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'bob_johnson@gmail.com'),
+-- ('John Johnson', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'john_johnson@gmail.com'),
+('admin', '$2y$12$s6s0XMmstoiq0brZOx5Z4.S6VFTWXLkSnyCIZvLdhgoKR82iFqpUq', 'admin@email.com');
+
+-- insert into users_roles (user_id, role_id) values (1, 1), (1, 3);
+insert into users_roles (user_id, role_id) values (1, 2);
+
+create table books (
+  id bigserial primary key,
+  title varchar(255),
+  description varchar(5000),
+  price numeric(8, 2),
+  publish_year int,
+  genre varchar(255)
+);
+
+create table orders (
+  id                    bigserial,
+  user_id               bigint not null,
+  primary key (id),
+  foreign key (user_id) references users (id)
+);
+
+create table orderitems (
+  id                    bigserial,
+  order_id              bigint not null,
+  book_id               bigint not null,
+  amount                int not null,
+
+  primary key (id),
+  foreign key (order_id) references orders (id),
+  foreign key (book_id) references books (id)
+);
+
+
+
 insert into books (title, description, price, publish_year, genre) values
 ('Harry Potter 1', 'Description 1', 300.0, 2000, 'FANTASY'),
 ('Harry Potter 2', 'Description 2', 400.0, 2001, 'FANTASY'),

@@ -47,6 +47,7 @@
             <td>Цена</td>
             <td>Год издания</td>
             <td>Жанр</td>
+            <td></td>
         </tr>
         </thead>
         <tbody>
@@ -56,6 +57,9 @@
             <td th:text="${b.price}"></td>
             <td th:text="${b.publishYear}"></td>
             <td th:text="${b.genre}"></td>
+            <td>
+                <a class="btn btn-primary" th:href="@{'/cart/add/?bookid=' + ${b.id}}">В корзину</a>
+            </td>
         </tr>
         </tbody>
     </table>
