@@ -29,8 +29,6 @@ public class BookController {
         Page<Book> page = bookService.findAll(bookFilter.getSpec(), pageIndex - 1, 5);
         model.addAttribute("books", page.getContent());
         model.addAttribute("param", params);
-//        model.addAttribute("maxPrice", page.getContent());
-
         model.addAttribute("pageHasNext", page.hasNext());
         model.addAttribute("pageHasPrevious", page.hasPrevious());
         model.addAttribute("nextPageNumber", page.nextOrLastPageable().getPageNumber());
