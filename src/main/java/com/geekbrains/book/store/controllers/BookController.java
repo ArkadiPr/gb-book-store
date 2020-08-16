@@ -47,11 +47,11 @@ public class BookController {
         return "store-page";
     }
 
-    // Эта часть кода будет сильно скорректирована после темы Spring REST
-    @GetMapping("/rest")
-    @ResponseBody
-    @CrossOrigin("*")
-    public List<Book> getAllBooks() {
-        return bookService.findAll();
-    }
+//    // Эта часть кода будет сильно скорректирована после темы Spring REST
+//    @GetMapping("/rest")
+//    @ResponseBody
+//    @CrossOrigin("*")
+//    public List<Book> getAllBooks() {
+//        return bookService.findAll();
+//    }
 }
