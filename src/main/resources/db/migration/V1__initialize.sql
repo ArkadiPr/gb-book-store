@@ -60,7 +60,12 @@ create table orderitems (
   foreign key (book_id) references books (id)
 );
 
-
+create table methodstat (
+  id                    bigserial,
+  methodname            varchar(255) not null,
+  callamount            bigint not null,
+  primary key (id)
+);
 
 insert into books (title, description, price, publish_year, genre) values
 ('Harry Potter 1', 'Description 1', 300.0, 2000, 'FANTASY'),
