@@ -1,14 +1,46 @@
 <!doctype html>
-<html ng-app="app" ng-controller="booksController">
+<html ng-app="app" ng-controller="booksController as bc">
   <head>
       <meta charset="utf-8">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    <script src="logic.js"></script>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   </head>
   <body>
+  <h4>Фильтр:</h4>
+  <form ng-submit="applyFilter()">
+      <div class="form-row">
+          <div class="form-group">
+              <label>Минимальная цена</label>
+              <input type="number"
+                     class="form-control form-control-sm" name="minPrice">
+          </div>
+          <div class="form-group">
+              <label>Максимальная цена</label>
+              <input type="number"
+                     class="form-control form-control-sm" name="maxPrice">
+          </div>
+      </div>
+      <div class="form-group">
+          <label>Название</label>
+          <input type="text" class="form-control form-control-sm" name="titlePart" ng-model="titlePart">
+      </div>
+      <div class="form-group">
+          <label>Жанры</label>
+          <div class="form-check" ng-repeat="g in GenresList">
+              <input type="checkbox" class="form-check-input" name="genre">
+              <label class="form-check-label">{{g.name}}</label>
+          </div>
+      </div>
+      <button type="submit" class="btn btn-primary" value="Submit">Применить</button>
+      <pre>teststr = {{queryStr}}</pre>
+      <pre>paramslist = {{paramList}}</pre>
+  </form>
+
+
   <div class="container">
       <h1>Books:</h1>
       <table class="table table-hover" cellpadding="0" cellspacing="0">
@@ -19,6 +51,7 @@
               <td>Год издания</td>
           </tr>
           <tbody>
+<!--          <tr ng-repeat="b in BooksList">-->
           <tr ng-repeat="b in BooksList">
               <td>{{b.title}}</td>
               <td>{{b.description}}</td>
@@ -27,20 +60,72 @@
           </tr>
           </tbody>
       </table>
+
+<!--      <div>-->
+      <nav aria-label="Page navigation example">
+          <ul class="pagination" >
+
+              <li class="page-item"><a class="page-link" name="{{currentPage}}" onclick='prevpage(this.name)'>Prev</a></li>
+<!--              <li class="page-item" ng-repeat="i in range.slice(0,repeatCount) track by $index"><a class="page-link" onclick='fillTable(($index + 1), 7)'>{{$index + 1}}</a></li>-->
+<!--              <li class="page-item" ng-repeat="i in range.slice(0,repeatCount) track by $index">-->
+<!--&lt;!&ndash;                  <a class="page-link" onclick='fillTable(($index + 1), 7)'>{{$index + 1}}</a>&ndash;&gt;-->
+<!--                  <a class="page-link" onclick='fillTable({$i}+1, 5)'>{{$index + 1}}</a>-->
+<!--              </li>-->
+<!--              <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+<!--              <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+<!--              <li class="page-item"><a class="page-link" onclick='fillTable({currentPage}+1, 5)'>Next</a></li>-->
+<!--              <li class="page-item"><a class="page-link" id='{{currentPage}}' onclick='fillTable(this.id +1, 3)'>Next</a></li>-->
+              <li class="page-item"><a class="page-link" name="{{currentPage}}" onclick='nextpage(this.name)'>Next</a></li>
+<!--              <li class="page-item"><a class="page-link" id='{{currentPage}}' ng-click="bc.nextpage(currentPage)">Next</a></li>-->
+<!--          </ul>-->
+      </nav>
+
+      <a class="btn btn-outline-warning" ng-click="bc.fillTable(1, 7)" onclick='fillTable(0, 7)'>Клик</a>
+      <a class="btn btn-outline-warning" ng-click="bc.fillTable(1, 7)" onclick='fillTable(1, 7)'>Клик2</a>
+
+<!--      <a class="btn btn-outline-warning" ng-click="bc.alert('aclick')" >Клик3</a>-->
+      <pre>page = {{currentPage + 1}}</pre>
+      <pre>pagesize = {{pagesize}}</pre>
+<!--      </div>-->
+
+<!--      <span>{{TotalElements}}</span>-->
+      <span>{{TotalPages}}</span>
+      <pre>teststr = {{queryStr}}</pre>
+<!--      <span>{{GenresList}}</span>-->
+
+<!--      <div ng-repeat="a in range(5) track by $index">{{$index + 1}}</div>-->
+<!--      <div ng-repeat="i in range.slice(0,repeatCount) track by $index">{{$index + 1}}</div>-->
+<!--      <span ng-repeat="a in range(5) track by $index">{{$index + 1}}</span>-->
   </div>
+  <form ng-submit="submit()">
+      Enter text and hit enter:
+      <input type="text" ng-model="text" name="text" />
+      <input type="submit" id="submit" value="Submit" />
+      <pre>list={{list}}</pre>
+  </form>
+
   </body>
 
-	<script>
-		var app = angular.module('app', []);
-		app.controller('booksController', function($scope, $http) {
-		  fillTable = function() {
-              $http.get("http://localhost:8189/store/books/rest")
-              .then(function(response) {
-                $scope.BooksList = response.data;
-              });
-		  };
+<!--	<script>-->
+<!--		var app = angular.module('app', []);-->
+<!--		app.controller('booksController', function($scope, $http) {-->
+<!--            // fillTable = function() {-->
+<!--            //     // $http.get("http://localhost:8189/store/books/rest")-->
+<!--            //     $http.get("http://localhost:8189/store/api/v1/books/")-->
+<!--            //     .then(function(response) {-->
+<!--            //       $scope.BooksList = response.data;-->
+<!--            //     });-->
+<!--            // };-->
 
-		  fillTable();
-		});
-	</script>
+<!--            fillTable = function() {-->
+<!--                // $http.get("http://localhost:8189/store/books/rest")-->
+<!--                $http.get("http://localhost:8189/store/api/v1/books/page?p=2")-->
+<!--                    .then(function(response) {-->
+<!--                        $scope.BooksList = response.content;-->
+<!--                    });-->
+<!--            };-->
+
+<!--		  fillTable();-->
+<!--		});-->
+<!--	</script>-->
 </html>
