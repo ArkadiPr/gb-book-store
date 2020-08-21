@@ -4,9 +4,11 @@ import com.geekbrains.book.store.entities.Book;
 import com.geekbrains.book.store.entities.dto.BookDto;
 import com.geekbrains.book.store.exceptions.ResourceNotFoundException;
 import com.geekbrains.book.store.pojo.BookGenre;
+import com.geekbrains.book.store.pojo.FilterParams;
 import com.geekbrains.book.store.services.BookService;
 import com.geekbrains.book.store.utils.BookFilter;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -45,6 +47,14 @@ public class BookRestController {
         System.out.println("getted parms: p=" + pageIndex + "s=" + size);
         return bookService.findAll(bookFilter.getSpec(), pageIndex, size);
     }
+
+//    @PostMapping("/filter")
+//    public Page<Book> applyFilter(
+//            @RequestBody FilterParams filterParams
+//            ){
+//
+//        return null;
+//    }
 
     @GetMapping("/genres")
 //    public List<Book.Genre> getGenres() {

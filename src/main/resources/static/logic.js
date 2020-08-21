@@ -71,30 +71,31 @@ app.controller('booksController', function ($scope, $http) {
         fillTable(parseInt($page) - 1, 5)
     }
 
-    $scope.paramlist = [];
-    $scope.queryStr = '';
-    $scope.titlePart = '';
+    // $scope.paramlist = [];
+    $scope.paramlist = '';
+    // $scope.queryStr = '';
+    // $scope.titlePart = '';
     $scope.applyFilter = function () {
         // $scope.queryStr = $scope.queryStr.concat('check');
         // $scope.queryStr.concat('check');
-        if($scope.titlePart){
-            $scope.queryStr.concat(this.titlePart)
-            $scope.paramlist.push(this.titlePart);
-            // $scope. = '';
-            // $scope.list.push(this.ti);
-        }
+        // if($scope.titlePart){
+        //     // $scope.queryStr.concat(this.titlePart);
+        //     // $scope.paramlist.push(this.titlePart);
+        //     // $scope. = '';
+        //     // $scope.list.push(this.ti);
+        // }
     }
 
-    $scope.list = [];
-    $scope.text = 'hello';
-    $scope.submit = function() {
-        if ($scope.text) {
-            $scope.list.push(this.text);
-            $scope.text = '';
-
-            $scope.queryStr.concat(this.text);
-        }
-    };
+    // $scope.list = [];
+    // $scope.text = 'hello';
+    // $scope.submit = function() {
+    //     if ($scope.text) {
+    //         $scope.list.push(this.text);
+    //         $scope.text = '';
+    //
+    //         $scope.queryStr.concat(this.text);
+    //     }
+    // };
 
     // $scope.alert = function() {
     //     $window.alert('angular click');
