@@ -1,0 +1,9 @@
+<x:Envelope xmlns:x="http://schemas.xmlsoap.org/soap/envelope/"
+            xmlns:c="http://geekbrains.com/books/store/soap/book">
+    <x:Header/>
+    <x:Body>
+        <c:getBookRequest>
+            <c:arg>all</c:arg>
+        </c:getBookRequest>
+    </x:Body>
+</x:Envelope>
