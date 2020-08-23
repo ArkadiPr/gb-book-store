@@ -3,27 +3,6 @@
            targetNamespace="http://geekbrains.com/book/store/soap/book"
            elementFormDefault="qualified">
 
-    <!--    <xs:element name="root">-->
-    <!--        <xs:complexType>-->
-    <!--            <xs:sequence>-->
-    <!--                <xs:element name="getBookRequest">-->
-    <!--                    <xs:complexType>-->
-    <!--                        <xs:sequence>-->
-    <!--                            <xs:element name="arg" type="xs:string"/>-->
-    <!--                        </xs:sequence>-->
-    <!--                    </xs:complexType>-->
-    <!--                </xs:element>-->
-    <!--                <xs:element name="getBookResponse">-->
-    <!--                    <xs:complexType>-->
-    <!--                        <xs:sequence>-->
-    <!--                            <xs:element name="book" type="tns:book"/>-->
-    <!--                        </xs:sequence>-->
-    <!--                    </xs:complexType>-->
-    <!--                </xs:element>-->
-    <!--            </xs:sequence>-->
-    <!--        </xs:complexType>-->
-    <!--    </xs:element>-->
-
     <xs:element name="getBookRequest">
         <xs:complexType>
             <xs:sequence>
@@ -35,7 +14,7 @@
     <xs:element name="getBookResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="book" type="tns:book"/>
+                <xs:element name="book" type="tns:book" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
