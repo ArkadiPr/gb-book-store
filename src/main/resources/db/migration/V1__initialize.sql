@@ -45,6 +45,7 @@ create table books (
 create table orders (
   id                    bigserial,
   user_id               bigint not null,
+  status                varchar(255),
   primary key (id),
   foreign key (user_id) references users (id)
 );

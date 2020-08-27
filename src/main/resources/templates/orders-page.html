@@ -13,7 +13,7 @@
 <div class="container">
     <div th:replace="~{navigation :: navigation(BookStore)}"/>
 
-    <h1>Cart</h1>
+    <h1>Orders</h1>
     <!--    <br>-->
     <!--    <h4>Фильтр:</h4>-->
     <!--    <form th:action="@{'/all'}" method="get">-->
@@ -49,9 +49,7 @@
         </tr>
         </tbody>
     </table>
-    <form th:action="@{'/cart/confirm'}" method="get">
-        <button type="submit" class="btn btn-primary">Оформить заказ</button>
-    </form>
+
     <!--    <h4>Общая сумма: <span th:text=""></span></h4>-->
 </div>
 </body>

@@ -54,8 +54,10 @@ public class Cart {
         }
 
         newOrder.setOrderItems(orderItems);
+        newOrder.setStatus("processing");
 
         orderService.saveOrUpdate(newOrder);
+        orderService.sendMessage(newOrder);
         orderItems.clear();
     }
 

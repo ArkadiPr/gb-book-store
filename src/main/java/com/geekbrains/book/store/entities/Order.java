@@ -23,6 +23,9 @@ public class Order {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Column(name = "status")
+    private String status;
+
     public Order(List<OrderItem> orderItems, User user) {
         this.orderItems = orderItems;
         this.user = user;
