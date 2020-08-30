@@ -4,6 +4,7 @@ import com.geekbrains.book.store.beans.Cart;
 import com.geekbrains.book.store.entities.Order;
 import com.geekbrains.book.store.entities.OrderItem;
 import com.geekbrains.book.store.entities.User;
+import com.geekbrains.book.store.services.OrderService;
 import com.geekbrains.book.store.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import java.security.Principal;
 public class CartController {
     private Cart cart;
     private UserService userService;
+    private OrderService orderService;
 
     @GetMapping
     public String cartAll(Model model
@@ -45,7 +47,8 @@ public class CartController {
         }
         User user = userService.findByUsername(principal.getName()).get();
 
-        cart.makeOrder(user);
+        orderService.makeOrder(cart, user);
+//        cart.makeOrder(user);
         return "redirect:/books";
     }
 

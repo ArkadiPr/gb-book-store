@@ -1,5 +1,6 @@
 package com.geekbrains.book.store.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.type.Type;
@@ -11,6 +12,7 @@ import java.math.BigDecimal;
 @Table(name = "books")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Book {
     public enum Genre {
         FANTASY, FICTION, DETECTIVE;

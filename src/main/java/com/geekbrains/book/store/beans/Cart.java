@@ -42,21 +42,6 @@ public class Cart {
         }
     }
 
-    @Transactional
-    public void makeOrder(User user){
-        if (orderItems.isEmpty()){
-            throw new ResourceNotFoundException("orderItems list is empty");
-        }
 
-        Order newOrder = new Order(user);
-        for (OrderItem orderItem: orderItems){
-            orderItem.setOrder(newOrder);
-        }
-
-        newOrder.setOrderItems(orderItems);
-
-        orderService.saveOrUpdate(newOrder);
-        orderItems.clear();
-    }
 
 }
